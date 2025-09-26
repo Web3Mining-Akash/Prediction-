@@ -1,0 +1,13 @@
+{
+  "name": "sports-prediction-bot-miniapp",
+  "version": "1.0.0",
+  "description": "Telegram Mini App (client) + Vercel serverless endpoint for JWT",
+  "main": "api/token.js",
+  "scripts": {
+    "start": "vercel dev",
+    "test": "echo \"No tests\" && exit 0"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.0"
+  }
+}
