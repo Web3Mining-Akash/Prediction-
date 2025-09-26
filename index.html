@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportsBet - Prediction Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="loading-screen">
+            <div class="loading-spinner"></div>
+            <p>Loading SportsBet...</p>
+        </div>
+
+        <!-- Login Screen -->
+        <div id="login-screen" class="login-screen hidden">
+            <div class="login-container">
+                <h1>Welcome to SportsBet</h1>
+                <p>Your premier sports prediction platform</p>
+                <button id="telegram-login" class="btn btn--primary btn--lg">
+                    Continue with Telegram
+                </button>
+            </div>
+        </div>
+
+        <!-- Main App -->
+        <div id="main-app" class="main-app hidden">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-content">
+                    <h1 class="app-title">SportsBet</h1>
+                    <div class="header-balance">
+                        <span class="balance-label">Balance:</span>
+                        <span id="user-balance" class="balance-amount">₹2,850.75</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Home Section -->
+                <div id="home-section" class="section active">
+                    <div class="section-header">
+                        <h2>Active Contests</h2>
+                        <div class="contest-filters">
+                            <button class="filter-btn active" data-category="all">All</button>
+                            <button class="filter-btn" data-category="cricket">Cricket</button>
+                            <button class="filter-btn" data-category="football">Football</button>
+                            <button class="filter-btn" data-category="basketball">Basketball</button>
+                        </div>
+                    </div>
+                    <div id="contests-list" class="contests-list"></div>
+                </div>
+
+                <!-- My Bets Section -->
+                <div id="bets-section" class="section">
+                    <div class="section-header">
+                        <h2>My Bets</h2>
+                        <div class="bet-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Bets</span>
+                                <span class="stat-value">45</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Won</span>
+                                <span class="stat-value">28</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Win Rate</span>
+                                <span class="stat-value">62%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bets-list" class="bets-list"></div>
+                </div>
+
+                <!-- Wallet Section -->
+                <div id="wallet-section" class="section">
+                    <div class="wallet-overview">
+                        <div class="balance-card">
+                            <h3>Current Balance</h3>
+                            <div class="balance-display">₹2,850.75</div>
+                            <div class="wallet-actions">
+                                <button id="deposit-btn" class="btn btn--primary">Deposit</button>
+                                <button id="withdraw-btn" class="btn btn--outline">Withdraw</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-header">
+                        <h3>Transaction History</h3>
+                    </div>
+                    <div id="transactions-list" class="transactions-list"></div>
+                </div>
+
+                <!-- Referrals Section -->
+                <div id="referrals-section" class="section">
+                    <div class="referral-overview">
+                        <div class="referral-stats">
+                            <div class="stat-card">
+                                <h4>Total Referred</h4>
+                                <span class="stat-number">12</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Total Earnings</h4>
+                                <span class="stat-number">₹425.50</span>
+                            </div>
+                        </div>
+                        <div class="referral-link-card">
+                            <h4>Your Referral Link</h4>
+                            <div class="link-container">
+                                <input type="text" id="referral-link" value="https://t.me/sportsbetbot?start=REF-JOH123" readonly>
+                                <button id="copy-link" class="btn btn--secondary">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-header">
+                        <h3>Referral Activity</h3>
+                    </div>
+                    <div id="referral-activity" class="referral-activity"></div>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profile-section" class="section">
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <h3>John Doe</h3>
+                            <p>@johnbetter</p>
+                            <p>Member since Aug 15, 2025</p>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="stat-row">
+                                <span>Total Bets</span>
+                                <span>45</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Total Wins</span>
+                                <span>28</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Total Earnings</span>
+                                <span>₹1,240.50</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Win Rate</span>
+                                <span>62%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <button class="nav-btn active" data-section="home">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-label">Home</span>
+                </button>
+                <button class="nav-btn" data-section="bets">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">My Bets</span>
+                </button>
+                <button class="nav-btn" data-section="wallet">
+                    <span class="nav-icon">💳</span>
+                    <span class="nav-label">Wallet</span>
+                </button>
+                <button class="nav-btn" data-section="referrals">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-label">Referrals</span>
+                </button>
+                <button class="nav-btn" data-section="profile">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-label">Profile</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Betting Modal -->
+        <div id="betting-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-contest-title">Place Your Bet</h3>
+                    <button id="close-modal" class="close-btn">×</button>
+                </div>
+                <div class="modal-body">
+                    <div id="bet-option-info" class="bet-option-info"></div>
+                    <div class="bet-form">
+                        <div class="form-group">
+                            <label class="form-label">Bet Amount (₹)</label>
+                            <input type="number" id="bet-amount" class="form-control" min="10" max="10000" placeholder="Enter amount">
+                            <div class="quick-amounts">
+                                <button class="quick-btn" data-amount="10">₹10</button>
+                                <button class="quick-btn" data-amount="50">₹50</button>
+                                <button class="quick-btn" data-amount="100">₹100</button>
+                                <button class="quick-btn" data-amount="500">₹500</button>
+                            </div>
+                        </div>
+                        <div class="bet-calculations">
+                            <div class="calc-row">
+                                <span>Bet Amount:</span>
+                                <span id="calc-bet-amount">₹0</span>
+                            </div>
+                            <div class="calc-row">
+                                <span>Platform Fee (10%):</span>
+                                <span id="calc-platform-fee">₹0</span>
+                            </div>
+                            <div class="calc-row">
+                                <span>Odds:</span>
+                                <span id="calc-odds">1.0x</span>
+                            </div>
+                            <div class="calc-row total">
+                                <span>Potential Winning:</span>
+                                <span id="calc-potential-winning">₹0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirm-bet" class="btn btn--primary btn--full-width">Confirm Bet</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transaction Modal -->
+        <div id="transaction-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="transaction-modal-title">Deposit Funds</h3>
+                    <button id="close-transaction-modal" class="close-btn">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Amount (₹)</label>
+                        <input type="number" id="transaction-amount" class="form-control" min="10" placeholder="Enter amount">
+                    </div>
+                    <div class="transaction-info">
+                        <p>Funds will be added to your wallet instantly.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirm-transaction" class="btn btn--primary btn--full-width">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
